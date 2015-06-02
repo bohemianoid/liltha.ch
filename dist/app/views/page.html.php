@@ -1,4 +1,4 @@
-<?php include 'app/inc/head.php' ?>
+<?php include '../app/inc/head.php' ?>
     <section class="hero">
         <div id="hero-image" class="hero-image">
             <img src="<?php echo get_header_images( 'image' ) ?>">
@@ -21,4 +21,4 @@
             <?php echo content() ?>
         </div>
     </section>
-<?php include 'app/inc/footer.php' ?>
+<?php include '../app/inc/footer.php' ?>
