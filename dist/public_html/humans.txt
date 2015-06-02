@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    <Simon Roth> -- <Web Designer and Developer> -- <hey@s.imon.ch>
+
+# THANKS
+
+    <Franziska Fässler>
+    <Claudia Zimmermann>
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    Normalize.css, jQuery, Modernizr

@@ -1,0 +1,45 @@
+---
+- name:       install packages
+  yum:        name={{ item }} state=present
+  with_items:
+    - libselinux-python
+    - MySQL-python
+
+- name:       add remi repo
+  yum:        name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+
+- name:       install mysql
+  yum:        name=mysql-server enablerepo=remi state=present
+
+- name:       start mysql service
+  service:    name=mysqld state=started enabled=yes
+
+- name:       set mysql root password
+  mysql_user: name=root password={{ db_rootpw }} host={{ item }} state=present
+  with_items:
+    - 127.0.0.1
+    - localhost.localdomain
+    - localhost
+
+- name:       save mysql root credentials
+  template:   src=.my.cnf.j2 dest=/root/.my.cnf
+  notify:     restart mysql
+
+- name:       delete blank mysql users
+  mysql_user: name="" host={{ item }} state=absent
+  with_items:
+    - 127.0.0.1
+    - localhost.localdomain
+    - localhost
+
+- name:       drop mysql test database
+  mysql_db:   name=test state=absent
+
+- name:       create mysql database
+  mysql_db:   name={{ db_name }} state=present
+
+- name:       import mysql database schema
+  mysql_db:   name={{ db_name }} state=import target=/vagrant/{{ db_schema }}
+
+- name:       create database user
+  mysql_user: name={{ db_user }} password={{ db_password }} priv={{ db_name }}.*:ALL host=localhost state=present

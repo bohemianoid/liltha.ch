@@ -1,0 +1,6 @@
+---
+db_rootpw:   root
+db_name:     db
+db_schema:   data/db.sql
+db_user:     dbusr
+db_password: dbpw

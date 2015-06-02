@@ -1,0 +1,29 @@
+---
+- name:     install packages
+  yum:      name={{ item }} state=present
+  with_items:
+    - libselinux-python
+    - httpd
+    - epel-release
+    - phpmyadmin
+
+- name:     add remi repo
+  yum:      name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+
+- name:     install php
+  yum:      name=php enablerepo=remi state=present
+
+- name:     httpd service state
+  service:  name=httpd state=started enabled=yes
+
+- name:     configure httpd
+  template: src=localhost.conf.j2 dest=/etc/httpd/conf.d/localhost.conf
+  notify:   restart httpd
+
+- name:     symlink document root
+  file:     src=/vagrant/{{ document_root }} dest=/var/www/html state=link force=yes
+  notify:   restart httpd
+
+- name:     remove phpMyAdmin.conf
+  file:     path=/etc/httpd/conf.d/phpMyAdmin.conf state=absent
+  notify:   restart httpd
