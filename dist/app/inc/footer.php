@@ -3,12 +3,12 @@
             <div class="inner"><?php echo config( 'site.title' ) ?> &mdash; <?php echo config( 'site.slogan' ) ?></div>
         </footer>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        
+
         <script src="<?php echo site() ?>assets/scripts.min.js"></script>
-        
-        <!-- Piwik -->
-        
-        <script> 
+
+        <!-- Piwik
+
+        <script>
             var _paq = _paq || [];
             _paq.push(['trackPageView']);
             _paq.push(['enableLinkTracking']);
@@ -21,8 +21,9 @@
             })();
         </script>
         <noscript><p><img src="http://piwik.liltha.ch/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
-        
-        <!-- End Piwik Code -->
+
+        End Piwik Code -->
+
         <?php if ( isset( $isFrontPage ) ) : ?>
             <script>
                 $( function() {

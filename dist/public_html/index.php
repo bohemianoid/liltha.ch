@@ -15,9 +15,9 @@ require '../app/inc/functions.php';
 config( 'source', '../app/config.ini' );
 
 // Initialize propel
-require_once '../app/vendor/propel/propel1/runtime/lib/Propel.php';
-Propel::init( '../app/build/conf/liltha-conf.php' );
-set_include_path( '../app/build/classes' . PATH_SEPARATOR . get_include_path());
+// require_once '../app/vendor/propel/propel1/runtime/lib/Propel.php';
+// Propel::init( '../app/build/conf/liltha-conf.php' );
+// set_include_path( '../app/build/classes' . PATH_SEPARATOR . get_include_path());
 
 
 
@@ -106,14 +106,14 @@ on( 'GET', '', function () {
 // ==========================================================================
 
 on( 'GET', 'about', function () {
-    $teachers = TeacherQuery::create()
-        ->orderByID( 'desc' )
-        ->find();
+    // $teachers = TeacherQuery::create()
+    //     ->orderByID( 'desc' )
+    //     ->find();
 
     render( 'about', array(
         'title' => 'About ' . config( 'site.title' ),
         'pageTitle' => 'About',
-        'teachers' => $teachers
+        // 'teachers' => $teachers
     ) );
 } );
 

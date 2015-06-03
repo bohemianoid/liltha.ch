@@ -16,14 +16,14 @@
 - name:     httpd service state
   service:  name=httpd state=started enabled=yes
 
-- name:     configure httpd
-  template: src=localhost.conf.j2 dest=/etc/httpd/conf.d/localhost.conf
-  notify:   restart httpd
-
 - name:     symlink document root
   file:     src=/vagrant/{{ document_root }} dest=/var/www/html state=link force=yes
   notify:   restart httpd
 
-- name:     remove phpMyAdmin.conf
-  file:     path=/etc/httpd/conf.d/phpMyAdmin.conf state=absent
+- name:     configure httpd
+  template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+  notify:   restart httpd
+
+- name:     configure phpmyadmin
+  template: src=phpMyAdmin.conf.j2 dest=/etc/httpd/conf.d/phpMyAdmin.conf
   notify:   restart httpd
